@@ -105,11 +105,12 @@
 }
 
 @layer base {
-  * {
-    @apply border-border;
+  html {
+    font-size: 22px; /* Increase the base font size */
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-base;
+    font-size: 1rem; /* Ensure body text uses the new base size */
   }
 
   html,
