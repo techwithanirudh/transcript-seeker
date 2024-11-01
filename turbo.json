@@ -9,9 +9,21 @@
       "dependsOn": ["^build"],
       "outputs": [".cache/tsbuildinfo.json", "dist/**"]
     },
+    "build:desktop": {
+      "dependsOn": ["^build", "build"],
+      "outputs": [
+        "apps/desktop/src-tauri/target/**",
+        "apps/desktop/src-tauri/icons/**"
+      ]
+    },
     "dev": {
       "cache": false,
       "persistent": false
+    },
+    "dev:desktop": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": []
     },
     "format": {
       "outputs": [".cache/.prettiercache"],
@@ -67,7 +79,12 @@
     "TURSO_AUTH_TOKEN",
     "BETTER_AUTH_SECRET",
     "BETTER_AUTH_URL",
-    "BETTER_AUTH_TRUSTED_ORIGINS"
+    "BETTER_AUTH_TRUSTED_ORIGINS",
+    "TAURI_PLATFORM",
+    "TAURI_DEBUG",
+    "TAURI_ENV_DEBUG",
+    "TAURI_ENV_PLATFORM",
+    "TAURI_DEV_HOST"
   ],
   "globalPassThroughEnv": [
     "NODE_ENV",

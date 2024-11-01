@@ -20,13 +20,16 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "build:desktop": "turbo run build:desktop",
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo run clean",
+    "clean:desktop": "turbo run clean -F desktop",
     "db:generate": "turbo -F @meeting-baas/db generate-migrations",
     "db:migrate": "turbo -F @meeting-baas/db migrate",
     "db:studio": "turbo -F @meeting-baas/db studio",
     "dev": "turbo watch dev --continue",
     "dev:web": "turbo watch dev -F @meeting-baas/web...",
+    "dev:desktop": "concurrently \"pnpm run dev\" \"turbo run dev:desktop\"",
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
     "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
     "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
@@ -34,7 +37,10 @@
     "lint:ws": "pnpm dlx sherif@latest",
     "postinstall": "pnpm lint:ws",
     "typecheck": "turbo run typecheck",
-    "ui-add": "turbo run ui-add"
+    "ui-add": "turbo run ui-add",
+    "tauri": "turbo run tauri",
+    "tauri:dev": "turbo run tauri:dev -F desktop",
+    "tauri:build": "turbo run tauri:build -F desktop"
   },
   "devDependencies": {
     "@meeting-baas/shared": "workspace:*",
@@ -42,7 +48,8 @@
     "@types/react-dom": "^18.3.0",
     "cross-env": "^7.0.3",
     "turbo": "^2.2.3",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "concurrently": "^7.0.0"
   },
   "pnpm": {
     "overrides": {
