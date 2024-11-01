@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tauri dev",
+    "dev": "echo 'Use dev:desktop instead'",
     "build": "tauri build",
     "dev:desktop": "tauri dev"
   },
