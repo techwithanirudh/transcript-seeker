@@ -1,5 +1,5 @@
 [package]
-name = "transcript-seeker"
+name = "Transcript-Seeker"
 version = "0.1.0"
 description = "Transcript Seeker Desktop App"
 authors = ["Lazare Rossillon, Anirudh Sriram"]
