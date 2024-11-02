@@ -1,7 +1,7 @@
 import type { Meeting, Transcript as TranscriptT } from '@/types';
 import type { JSONContent } from 'novel';
 import { useApiKey } from '@/hooks/use-api-key';
-import { StorageBucketAPI } from '@/lib/storage-bucket-api';
+import { isStorageBucketSupported, StorageBucketAPI } from '@/lib/storage-bucket-api';
 import * as assemblyai from '@/lib/transcription/assemblyai';
 import * as gladia from '@/lib/transcription/gladia';
 import { createMeeting, setEditor } from '@/queries';
@@ -67,6 +67,18 @@ interface TranscriptionFunctionResponse {
 }
 
 export function UploadForm({ provider, options }: UploadProps) {
+  if (!isStorageBucketSupported()) {
+    return (
+      <div className="p-4 text-center">
+        <h2 className="text-lg font-semibold text-red-600">Browser Not Supported</h2>
+        <p className="mt-2">
+          Your browser does not support local file storage (Storage Buckets API). Please use Chrome
+          or Edge, or update your browser.
+        </p>
+      </div>
+    );
+  }
+
   const { apiKey: gladiaApiKey } = useApiKey({ type: 'gladia' });
   const { apiKey: assemblyAIApiKey } = useApiKey({ type: 'assemblyai' });
   const navigate = useNavigate();

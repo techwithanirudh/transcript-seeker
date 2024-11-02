@@ -12,6 +12,10 @@ interface NavigatorStorage extends Navigator {
   };
 }
 
+export function isStorageBucketSupported(): boolean {
+  return 'storageBuckets' in navigator;
+}
+
 export class StorageBucketAPI {
   private bucketName: string;
   private bucket: StorageBucket | null;
@@ -23,8 +27,7 @@ export class StorageBucketAPI {
 
   async init(): Promise<void> {
     try {
-      // Check if the Storage Buckets API is available
-      if (!('storageBuckets' in navigator)) {
+      if (!isStorageBucketSupported()) {
         throw new Error('Storage Buckets API is not supported in this browser');
       }
 
