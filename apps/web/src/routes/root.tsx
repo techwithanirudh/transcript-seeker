@@ -3,6 +3,7 @@ import ServerAlert from '@/components/server-alert';
 import ServerAvailablity from '@/components/server-availablity';
 import { useApiKey } from '@/hooks/use-api-key';
 import { useSession } from '@/lib/auth';
+import { isInTauri } from '@/lib/tauri/tauri-helper';
 import { useServerAvailabilityStore } from '@/store';
 import { Calendar, Cog, Info, List, Mic, Upload } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -28,6 +29,13 @@ function RootPage() {
 
   return (
     <div className="flex min-h-dvh items-center justify-center bg-gradient-to-br from-muted/20 to-muted/40 p-4">
+      {isInTauri && (
+        <div className="fixed left-0 top-0 z-50 m-4 flex justify-center">
+          <div className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
+            Hello world, from Tauri! 🦀
+          </div>
+        </div>
+      )}
       <div className="fixed left-0 right-0 top-0 z-50 m-4 flex justify-center">
         <div className="max-w-md">
           <ServerAlert mode={serverAvailability} contrast="bright" />
