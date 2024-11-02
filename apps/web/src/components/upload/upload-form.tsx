@@ -1,12 +1,12 @@
+import type { Meeting, Transcript as TranscriptT } from '@/types';
+import type { JSONContent } from 'novel';
 import { useApiKey } from '@/hooks/use-api-key';
 import { StorageBucketAPI } from '@/lib/storage-bucket-api';
 import * as assemblyai from '@/lib/transcription/assemblyai';
 import * as gladia from '@/lib/transcription/gladia';
 import { createMeeting, setEditor } from '@/queries';
-import type { Meeting, Transcript as TranscriptT } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UploadCloudIcon } from 'lucide-react';
-import type { JSONContent } from 'novel';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -109,9 +109,22 @@ export function UploadForm({ provider, options }: UploadProps) {
 
       const botId = uuidv4();
 
-      const storageAPI = new StorageBucketAPI('local_files');
-      await storageAPI.init();
-      await storageAPI.set(`${botId}.mp4`, file);
+      try {
+        const storageAPI = new StorageBucketAPI('local_files');
+        await storageAPI.init();
+        await storageAPI.set(`${botId}.mp4`, file);
+      } catch (error) {
+        if ((error as Error).message === 'Storage Buckets API is not supported in this browser') {
+          toast.error('Browser Not Supported', {
+            id: loading,
+            description:
+              'Your browser does not support local file storage (Storage Buckets API). Please use Chrome or Edge, or update your browser.',
+            duration: Infinity,
+          });
+          return;
+        }
+        throw error; // Re-throw other errors
+      }
 
       const newMeeting: Omit<Meeting, 'id'> = {
         botId: botId,
@@ -128,7 +141,7 @@ export function UploadForm({ provider, options }: UploadProps) {
       };
 
       const { id } = await createMeeting(newMeeting);
-      // todo: check if this wokrs
+
       if (data.summarization) {
         const content: JSONContent = {
           type: 'doc',

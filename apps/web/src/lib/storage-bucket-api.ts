@@ -23,6 +23,11 @@ export class StorageBucketAPI {
 
   async init(): Promise<void> {
     try {
+      // Check if the Storage Buckets API is available
+      if (!('storageBuckets' in navigator)) {
+        throw new Error('Storage Buckets API is not supported in this browser');
+      }
+
       this.bucket = await (navigator as NavigatorStorage).storageBuckets.open(this.bucketName, {
         durability: 'relaxed',
         persisted: true,
@@ -30,6 +35,7 @@ export class StorageBucketAPI {
       console.log(`Bucket ${this.bucket.name} initialized.`);
     } catch (error) {
       console.error(`Failed to initialize bucket: ${(error as Error).message}`);
+      throw error;
     }
   }
 
