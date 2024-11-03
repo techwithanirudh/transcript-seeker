@@ -4,6 +4,7 @@ import ServerAvailablity from '@/components/server-availablity';
 import { useApiKey } from '@/hooks/use-api-key';
 import { useSession } from '@/lib/auth';
 import { useServerAvailabilityStore } from '@/store';
+import { invoke } from '@tauri-apps/api/core';
 import { Calendar, Cog, Info, List, Mic, Upload } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -25,6 +26,8 @@ function RootPage() {
     error, //error object
   } = useSession();
   const apiKeysExist = baasApiKey && gladiaApiKey && assemblyAIApiKey && openAIApiKey;
+
+  invoke('my_custom_command');
 
   return (
     <div className="flex min-h-dvh items-center justify-center bg-gradient-to-br from-muted/20 to-muted/40 p-4">

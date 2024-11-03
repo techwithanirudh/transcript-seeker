@@ -26,6 +26,7 @@
     "@schedule-x/react": "^2.4.1",
     "@schedule-x/theme-default": "^2.4.1",
     "@tanstack/react-table": "^8.19.2",
+    "@tauri-apps/api": "^2.0.3",
     "@vidstack/react": "^1.11.24",
     "assemblyai": "^4.6.1",
     "better-auth": "0.6.2",

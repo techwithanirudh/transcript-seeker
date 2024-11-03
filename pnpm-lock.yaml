@@ -289,6 +289,9 @@ importers:
       '@tanstack/react-table':
         specifier: ^8.19.2
         version: 8.20.5(react-dom@19.0.0-rc-7c8e5e7a-20241101(react@19.0.0-rc-7c8e5e7a-20241101))(react@19.0.0-rc-7c8e5e7a-20241101)
+      '@tauri-apps/api':
+        specifier: ^2.0.3
+        version: 2.0.3
       '@vidstack/react':
         specifier: ^1.11.24
         version: 1.12.12(@types/react@18.3.12)(react@19.0.0-rc-7c8e5e7a-20241101)
@@ -3838,6 +3841,9 @@ packages:
   '@tanstack/table-core@8.20.5':
     resolution: {integrity: sha512-P9dF7XbibHph2PFRz8gfBKEXEY/HJPOhym8CHmjF8y3q5mWpKx9xtZapXQUWCgkqvsK0R46Azuz+VaxD4Xl+Tg==}
     engines: {node: '>=12'}
+
+  '@tauri-apps/api@2.0.3':
+    resolution: {integrity: sha512-840qk6n8rbXBXMA5/aAgTYsg5JAubKO0nXw5wf7IzGnUuYKGbB4oFBIZtXOIWy+E0kNTDI3qhq5iqsoMJfwp8g==}
 
   '@tauri-apps/cli-darwin-arm64@2.0.4':
     resolution: {integrity: sha512-siH7rOHobb16rPbc11k64p1mxIpiRCkWmzs2qmL5IX21Gx9K5onI3Tk67Oqpf2uNupbYzItrOttaDT4NHFC7tw==}
@@ -11932,6 +11938,8 @@ snapshots:
       react-dom: 19.0.0-rc-7c8e5e7a-20241101(react@19.0.0-rc-7c8e5e7a-20241101)
 
   '@tanstack/table-core@8.20.5': {}
+
+  '@tauri-apps/api@2.0.3': {}
 
   '@tauri-apps/cli-darwin-arm64@2.0.4':
     optional: true
