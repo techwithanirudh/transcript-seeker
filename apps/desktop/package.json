@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "echo 'Use dev:desktop instead'",
+    "dev": "tauri dev",
     "build": "tauri build",
-    "dev:desktop": "tauri dev"
+    "dev:desktop": "tauri dev",
+    "tauri:dev": "tauri dev"
   },
   "keywords": [],
   "author": "",

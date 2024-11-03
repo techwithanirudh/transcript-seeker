@@ -4,10 +4,10 @@
   "version": "0.1.0",
   "identifier": "com.spoke.app",
   "build": {
-    "frontendDist": "../web/dist",
+    "frontendDist": "../../web/dist",
     "devUrl": "http://localhost:5173",
-    "beforeDevCommand": "turbo dev",
-    "beforeBuildCommand": "turbo build"
+    "beforeDevCommand": "pnpm --filter @meeting-baas/web dev",
+    "beforeBuildCommand": "pnpm --filter @meeting-baas/web build"
   },
   "app": {
     "windows": [
