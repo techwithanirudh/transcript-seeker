@@ -6,7 +6,7 @@
   },
   "hosting": [
     {
-      "site": "transcript-seeker-proxy",
+      "site": "transcript-seeker-proxy-pre-prod",
       "public": ".output/public",
       "cleanUrls": true,
       "rewrites": [

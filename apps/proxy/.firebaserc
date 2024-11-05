@@ -3,8 +3,8 @@
     "transcript-seeker": "transcript-seeker-bdc29"
   },
   "targets": {
-    "transcript-seeker-proxy": [
-      "transcript-seeker-proxy"
+    "transcript-seeker-proxy-pre-prod": [
+      "transcript-seeker-proxy-pre-prod"
     ]
   },
   "etags": {}
