@@ -88,7 +88,7 @@ export type SelectMeeting = typeof meetingsTable.$inferSelect;
 
 export const editorsTable = pgTable('editors', {
   id: serial('id'),
-  meetingId: serial('meeting_id'),
+  meetingId: serial('meeting_id').unique(),
   content: jsonb('content').notNull().default({}),
   createdAt: timestamp('created_at', {
     mode: 'date',
@@ -114,7 +114,7 @@ export type SelectEditor = typeof editorsTable.$inferSelect;
 
 export const chatsTable = pgTable('chats', {
   id: serial('id'),
-  meetingId: serial('meeting_id'),
+  meetingId: serial('meeting_id').unique(),
   messages: jsonb('messages')
     .notNull()
     .$type<Message[]>()
