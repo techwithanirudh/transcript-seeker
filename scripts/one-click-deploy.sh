@@ -10,7 +10,7 @@ echo "Installing dependencies..."
 pnpm install
 
 # Set environment to production
-export NODE_ENV=production
+export NODE_ENV=pre-production
 echo "Environment set to production."
 
 # Build and deploy apps/web
@@ -39,7 +39,7 @@ echo "Preparing for Cloud Run deployment..."
 # Set environment variables for Cloud Run
 export COMMIT_SHA=$(git rev-parse --short HEAD)
 export DEPLOY_REGION="us-central1"
-export SERVICE_NAME="transcript-seeker-api-prod"
+export SERVICE_NAME="transcript-seeker-api-pre-prod"
 export GITHUB_USERNAME="techwithanirudh"
 
 echo "Environment variables set:"
