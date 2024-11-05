@@ -55,7 +55,7 @@ gcloud run deploy "$SERVICE_NAME" \
   --region="$DEPLOY_REGION" \
   --allow-unauthenticated \
   --port=3001 \
-  --set-env-vars "$(grep -v '^#' apps/api/.env.production.local | grep -v '^\s*$' | sed 's/=\s*"\(.*\)"$/=\1/' | tr '\n' ',' | sed 's/,$//')" \
+  --set-env-vars "$(grep -v '^#' apps/api/.env.pre-production.local | grep -v '^\s*$' | sed 's/=\s*"\(.*\)"$/=\1/' | tr '\n' ',' | sed 's/,$//')" \
   || { echo "Cloud Run deployment failed for $SERVICE_NAME"; exit 1; }
 
 # Build and submit to Cloud Build
