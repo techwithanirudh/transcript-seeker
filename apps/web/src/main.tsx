@@ -1,5 +1,6 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from 'react';
+import { NuqsAdapter } from 'nuqs/adapters/react-router';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 import '@/styles/globals.css';
@@ -9,8 +10,10 @@ import App from './App';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <NuqsAdapter>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </NuqsAdapter>
   </StrictMode>,
 );
