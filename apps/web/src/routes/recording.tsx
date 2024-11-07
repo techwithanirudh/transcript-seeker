@@ -44,14 +44,13 @@ const fetchMeeting = async (botId: string, baasApiKey: string, isHeadless: boole
     });
 
     if (data) {
-      const meetingDb = await createMeeting({
+      meeting = {
+        id: 10,
         type: 'meetingbaas',
         name: 'Imported Meeting',
         ...data,
         status: 'loaded',
-      });
-
-      meeting = meetingDb[0];
+      };
     }
   }
 
@@ -75,7 +74,7 @@ function MeetingContent({ botId, baasApiKey, isHeadless }: { botId: string; baas
   return <Viewer botId={botId} isLoading={false} meeting={meeting} />;
 }
 
-export default function MeetingPage() {
+export default function RecordingPage() {
   const { botId } = useParams<{ botId: string }>();
   const [code] = useQueryState('code', { defaultValue: '' })
   const { apiKey: baasKey } = useApiKey({ type: 'meetingbaas' });

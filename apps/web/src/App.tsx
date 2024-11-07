@@ -4,7 +4,7 @@ import Join from '@/routes/join';
 import Layout from '@/routes/layout';
 import Login from '@/routes/login';
 import NotFound from '@/routes/not-found';
-import Meeting from '@/routes/recording';
+import Recording from '@/routes/recording';
 import Recordings from '@/routes/recordings';
 import Root from '@/routes/root';
 import Settings from '@/routes/settings';
@@ -26,7 +26,7 @@ export default function App() {
           <Route path="meetings" element={<Calendars />} />
           <Route path="join" element={<Join />} />
           <Route path="upload" element={<Upload />} />
-          <Route path="/meeting/:botId" element={<Meeting />} />
+          <Route path="/recording/:botId" element={<Recording />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

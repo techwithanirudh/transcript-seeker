@@ -53,7 +53,7 @@ export function ImportMeeting() {
     mutate('meetings');
 
     toast.success('Meeting imported successfully');
-    // navigate(`/meeting/${botId}`)
+    // navigate(`/recording/${botId}`)
   }
 
   return (

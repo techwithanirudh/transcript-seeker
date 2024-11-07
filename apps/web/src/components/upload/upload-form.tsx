@@ -154,7 +154,7 @@ export function UploadForm({ provider, options }: UploadProps) {
         id: loading,
       });
 
-      navigate(`/meeting/${botId}`);
+      navigate(`/recording/${botId}`);
     } catch (error) {
       console.error('Error generating transcript:', error);
       toast.error('Oops! Something went wrong, please try again later', {
