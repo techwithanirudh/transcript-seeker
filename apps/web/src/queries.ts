@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 
 import type {
   InsertAPIKey,
@@ -111,21 +111,17 @@ export async function setEditor({
   content: InsertEditor['content'];
 }) {
   if (!meetingId) return;
-  const editor = await db.query.editorsTable.findFirst({
-    where: (editors, { eq }) => eq(editors.meetingId, meetingId),
-  });
-  if (editor) {
-    return await db
-      .update(editorsTable)
-      .set({ content: content, updatedAt: new Date() })
-      .where(eq(editorsTable.meetingId, meetingId))
-      .returning();
-  } else {
-    return await db
-      .insert(editorsTable)
-      .values({ meetingId: meetingId, content: content })
-      .returning();
-  }
+  return await db
+    .insert(editorsTable)
+    .values({ meetingId: meetingId, content: content })
+    .onConflictDoUpdate({
+      target: editorsTable.meetingId,
+      set: {
+        content: content,
+        updatedAt: new Date(),
+      },
+    })
+    .returning();
 }
 
 export async function getChatByMeetingId({ meetingId }: { meetingId: SelectChat['meetingId'] }) {
@@ -144,20 +140,16 @@ export async function createMessage({
   message: Message;
 }) {
   if (!meetingId) return;
-  const chat = await db.query.chatsTable.findFirst({
-    where: (chats, { eq }) => eq(chats.meetingId, meetingId),
-  });
 
-  if (chat) {
-    return await db
-      .update(chatsTable)
-      .set({ messages: [...chat.messages, message], updatedAt: new Date() })
-      .where(eq(chatsTable.meetingId, meetingId))
-      .returning();
-  } else {
-    return await db
-      .insert(chatsTable)
-      .values({ meetingId: meetingId, messages: [message] })
-      .returning();
-  }
+  return await db
+    .insert(chatsTable)
+    .values({ meetingId: meetingId, messages: [message] })
+    .onConflictDoUpdate({
+      target: chatsTable.meetingId,
+      set: {
+        messages: sql`${chatsTable.messages} || ${JSON.stringify([message])}::jsonb`,
+        updatedAt: new Date(),
+      },
+    })
+    .returning();
 }

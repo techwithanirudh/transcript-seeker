@@ -44,7 +44,7 @@ export const fetchBotDetails = async ({ ...params }: FetchBotDetailsProps) => {
 
   const data: MeetingData | undefined | null = response.data;
 
-  if (!data?.bot_data.bot?.id) return null;
+  if (!data?.bot_data?.bot?.id) return null;
 
   const bot = data.bot_data.bot;
   const transcripts = data.bot_data.transcripts;
@@ -64,7 +64,7 @@ export const fetchBotDetails = async ({ ...params }: FetchBotDetailsProps) => {
     },
     endedAt: bot.ended_at ? new Date(bot.ended_at + 'Z') : null,
     createdAt: new Date(bot.created_at + 'Z'),
-  } as Omit<Meeting, 'id'>;
+  } as Omit<Meeting, 'id' | 'type' | 'status' | 'name'>;
 };
 
 interface FetchCalendarsProps extends Omit<FetchCalendarsParams, 'proxyUrl'> {}

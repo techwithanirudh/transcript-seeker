@@ -43,6 +43,13 @@
       "when": 1729682842710,
       "tag": "0005_simple_sumo",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1730828847964,
+      "tag": "0006_lean_hitman",
+      "breakpoints": true
     }
   ]
 }

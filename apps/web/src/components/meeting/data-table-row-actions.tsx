@@ -67,7 +67,7 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps<Meeting>) 
     <div className="flex w-full items-center justify-end gap-2">
       {meeting.status === 'loaded' ? (
         <Button size="icon" asChild className="h-8 w-8 p-0">
-          <Link to={`/meeting/${meeting.botId}`}>
+          <Link to={`/recording/${meeting.botId}`}>
             <EyeIcon className="h-4 w-4" />
           </Link>
         </Button>

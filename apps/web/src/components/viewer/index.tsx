@@ -209,8 +209,6 @@ export function Viewer({ botId, isLoading, meeting: data }: ViewerProps) {
     }
   }, [isEditorLoading]);
 
-  const [showEditorChat, setShowEditorChat] = React.useState(false);
-
   return (
     <div className="min-h-svh">
       <div className="w-full">
@@ -244,14 +242,6 @@ export function Viewer({ botId, isLoading, meeting: data }: ViewerProps) {
             </Button>
           </div>
 
-          <label htmlFor="show-editor-chat" className="text-sm font-medium">
-            Show Editor & Chat
-          </label>
-          <Switch
-            id="show-editor-chat"
-            checked={showEditorChat}
-            onCheckedChange={setShowEditorChat}
-          />
           {data.type === 'meetingbaas' && !!data.endedAt && (
             <div className="flex gap-2">
               <Button
@@ -266,12 +256,12 @@ export function Viewer({ botId, isLoading, meeting: data }: ViewerProps) {
           )}
         </header>
       </div>
-      <div className={cn('flex justify-center', showEditorChat ? 'w-full' : 'mx-auto max-w-3xl')}>
+      <div className={cn('flex justify-center', 'w-full')}>
         <ResizablePanelGroup
           className="flex min-h-[200dvh] lg:min-h-[calc(100svh-theme(spacing.16))]"
           direction={isDesktop ? 'horizontal' : 'vertical'}
         >
-          <ResizablePanel defaultSize={showEditorChat ? 50 : 100} minSize={25}>
+          <ResizablePanel defaultSize={50} minSize={25}>
             <ResizablePanelGroup direction="vertical" className={cn('flex h-full w-full')}>
               <ResizablePanel defaultSize={50} minSize={25}>
                 {video && (
@@ -311,33 +301,29 @@ export function Viewer({ botId, isLoading, meeting: data }: ViewerProps) {
               </ResizablePanel>
             </ResizablePanelGroup>
           </ResizablePanel>
-          {showEditorChat && (
-            <>
-              <ResizableHandle withHandle />
+          <ResizableHandle withHandle />
+          <ResizablePanel defaultSize={50} minSize={25}>
+            <ResizablePanelGroup direction="vertical" className={cn('flex h-full w-full')}>
               <ResizablePanel defaultSize={50} minSize={25}>
-                <ResizablePanelGroup direction="vertical" className={cn('flex h-full w-full')}>
-                  <ResizablePanel defaultSize={50} minSize={25}>
-                    <Editor
-                      initialValue={LOADING_EDITOR_DATA}
-                      onCreate={({ editor }) => setEditor(editor)}
-                      onChange={handleEditorChange}
-                    />
-                  </ResizablePanel>
-                  <ResizableHandle withHandle />
-                  <ResizablePanel defaultSize={33} minSize={25}>
-                    <Chat
-                      messages={chatMessages}
-                      handleSubmit={handleChatSubmit}
-                      disabled={{
-                        value: !openAIApiKey || isChatLoading,
-                        reason: isChatLoading ? 'loading' : 'openai',
-                      }}
-                    />
-                  </ResizablePanel>
-                </ResizablePanelGroup>
+                <Editor
+                  initialValue={LOADING_EDITOR_DATA}
+                  onCreate={({ editor }) => setEditor(editor)}
+                  onChange={handleEditorChange}
+                />
               </ResizablePanel>
-            </>
-          )}
+              <ResizableHandle withHandle />
+              <ResizablePanel defaultSize={33} minSize={25}>
+                <Chat
+                  messages={chatMessages}
+                  handleSubmit={handleChatSubmit}
+                  disabled={{
+                    value: !openAIApiKey || isChatLoading,
+                    reason: isChatLoading ? 'loading' : 'openai',
+                  }}
+                />
+              </ResizablePanel>
+            </ResizablePanelGroup>
+          </ResizablePanel>
         </ResizablePanelGroup>
       </div>
       <RenameModal
