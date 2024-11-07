@@ -72,7 +72,7 @@ export function MeetingForm() {
       });
 
       toast.success(`Meeting bot created successfully!`);
-      navigate(`/meeting/${result.data?.bot_id}`);
+      navigate(`/recording/${result.data?.bot_id}`);
     } catch (error) {
       console.error('Error adding meeting bot:', error);
       toast.error('Failed to create meeting bot');
